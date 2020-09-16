@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><SealServerConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><WebProductName>Seal Report</WebProductName><FileReplacePatterns><FileReplacePattern><FileName>datatables.min.css</FileName><OldValue>url(Bootstrap-3.3.7/fonts/glyphicons-halflings-regular</OldValue><NewValue>url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/fonts/glyphicons-halflings-regular</NewValue></FileReplacePattern></FileReplacePatterns><CssFiles>_ed.editor.bootstrap.min.css</CssFiles><ScriptFiles>_ed.dataTables.editor.min.js&#xD;
 _ed.editor.bootstrap.min.js&#xD;
-_ed.common.js</ScriptFiles><TaskFolderName>Seal Report</TaskFolderName><AuditEnabled>true</AuditEnabled><AuditScript /><InitScript /><ReportCreationScript /><CommonScripts><CommonScript><Name>SetNegativeValuesInRed</Name><Script>@using System.Text&#xD;
+_ed.common.js</ScriptFiles><UseSealScheduler>true</UseSealScheduler><TaskFolderName>Seal Report</TaskFolderName><AuditEnabled>true</AuditEnabled><AuditScript /><InitScript /><ReportCreationScript /><CommonScripts><CommonScript><Name>SetNegativeValuesInRed</Name><Script>@using System.Text&#xD;
 @using Seal.Model&#xD;
 @functions {&#xD;
     //Before execution, this script will be added at the end of all scripts executed...&#xD;
@@ -23,7 +23,7 @@ _ed.common.js</ScriptFiles><TaskFolderName>Seal Report</TaskFolderName><AuditEna
         }&#xD;
     }&#xD;
 }&#xD;
-</Script></CommonScript></CommonScripts><PdfServicePassword /><PdfWebServiceURL /><DashboardPdfConfigurations><string>&lt;?xml version="1.0" encoding="utf-16"?&gt;&#xD;
+</Script></CommonScript></CommonScripts><PdfUseClient>true</PdfUseClient><PdfServicePassword /><PdfWebServiceURL /><PdfConfigurations><string>&lt;?xml version="1.0" encoding="utf-16"?&gt;&#xD;
 &lt;HtmlToPdfConverter xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;&#xD;
   &lt;HtmlViewerWidth&gt;1024&lt;/HtmlViewerWidth&gt;&#xD;
   &lt;HtmlViewerHeight&gt;0&lt;/HtmlViewerHeight&gt;&#xD;
@@ -156,4 +156,4 @@ _ed.common.js</ScriptFiles><TaskFolderName>Seal Report</TaskFolderName><AuditEna
 &lt;SealPdfCfg xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;&#xD;
   &lt;ConverterScript /&gt;&#xD;
   &lt;DocumentScript /&gt;&#xD;
-&lt;/SealPdfCfg&gt;</string></DashboardPdfConfigurations><DefaultCulture /><CsvSeparator /><WebApplicationName>/seal</WebApplicationName><WebApplicationPoolName>Seal Application Pool</WebApplicationPoolName><WebPublicationDirectory>C:\inetpub\wwwroot\Seal Report</WebPublicationDirectory><InstallationDirectory /></SealServerConfiguration>
+&lt;/SealPdfCfg&gt;</string></PdfConfigurations><DefaultCulture /><CsvSeparator /><WebApplicationName>/seal</WebApplicationName><WebApplicationPoolName>Seal Application Pool</WebApplicationPoolName><WebPublicationDirectory>C:\inetpub\wwwroot\Seal Report</WebPublicationDirectory><InstallationDirectory /></SealServerConfiguration>
