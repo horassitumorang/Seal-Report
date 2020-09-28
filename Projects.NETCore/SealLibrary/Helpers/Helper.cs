@@ -45,14 +45,41 @@ namespace Seal.Helpers
             else return value.ToString();
         }
 
+<<<<<<< HEAD
         static public void CopyProperties(object src, object dest)
         {
             foreach (PropertyDescriptor item in TypeDescriptor.GetProperties(src))
             {
+=======
+        static public void CopyProperties(object src, object dest, string[] skipNames = null)
+        {
+            foreach (PropertyDescriptor item in TypeDescriptor.GetProperties(src))
+            {
+                if (skipNames != null && skipNames.Contains(item.Name)) continue;
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
                 item.SetValue(dest, item.GetValue(src));
             }
         }
 
+<<<<<<< HEAD
+=======
+        static public bool ArePropertiesIdentical(object obj1, object obj2, string skipEmptySuffix = "")
+        {
+            bool result = true;
+            foreach (PropertyDescriptor item in TypeDescriptor.GetProperties(obj1))
+            {
+                if (!string.IsNullOrEmpty(skipEmptySuffix) && string.IsNullOrEmpty(item.GetValue(obj1).ToString()) && item.Name.EndsWith(skipEmptySuffix)) continue;
+
+                if (item.GetValue(obj1).ToString() != item.GetValue(obj2).ToString())
+                {
+                    result = false;
+                    break;
+                }
+            }
+            return result;
+        }
+
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
 
         static public void CopyPropertiesDifferentObjects(object src, object dest)
         {
@@ -652,7 +679,11 @@ namespace Seal.Helpers
 
         }
 
+<<<<<<< HEAD
         public static Object Clone(Object source)
+=======
+        public static object Clone(Object source)
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
         {
             XmlSerializer serializer = new XmlSerializer(source.GetType());
             MemoryStream ms = new MemoryStream();
@@ -663,7 +694,11 @@ namespace Seal.Helpers
 
         public static DbConnection DbConnectionFromConnectionString(ConnectionType connectionType, string connectionString)
         {
+<<<<<<< HEAD
             DbConnection connection = null;
+=======
+            DbConnection connection;
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
             if (connectionType == ConnectionType.MSSQLServer)
             {
                 connection = new SqlConnection(connectionString);

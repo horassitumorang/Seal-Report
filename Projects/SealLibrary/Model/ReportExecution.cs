@@ -623,6 +623,21 @@ namespace Seal.Model
                 var tasks = new List<Task>();
                 foreach (ReportModel model in Report.ExecutionModels.Where(i => i.ExecutionSet == set))
                 {
+<<<<<<< HEAD
+=======
+                    //Skip models having view restriction not triggered
+                    if (model.ExecutionRestrictions.Exists(i => Report.ExecutionViewRestrictions.Contains(i)))
+                    {
+                        if (Report.ExecutionTriggerView == null || !model.ExecutionRestrictions.Exists(i => Report.ExecutionTriggerView.Restrictions.Contains(i)))
+                        {
+                            //And the model was not triggered, 
+                            //check if the model has a view with force_execution flag
+                            if (!Report.AllViews.Exists(j => j.Model == model && j.GetBoolValue(Parameter.ForceExecutionParameter))) { 
+                                continue;
+                            }
+                        }
+                    }
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
                     tasks.Add(buildResultTables(model));
                 }
                 await Task.WhenAll(tasks);
@@ -660,6 +675,13 @@ namespace Seal.Model
                     if (model.ResultTable == null || !Report.RenderOnly)
                     {
                         Report.LogMessage("Model '{0}': Loading result table...", model.Name);
+<<<<<<< HEAD
+=======
+
+                        //Keep page Ids from previous execution as they may be requested by a Widget Pagination...
+                        model.PreviousPageIds = (from page in model.Pages select page.PageId).ToList();
+
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
                         await model.FillResultTableAsync(_runningModels, _runningSubTables);
 
                         if (!string.IsNullOrEmpty(model.ExecutionError)) throw new Exception(model.ExecutionError);
@@ -859,6 +881,10 @@ namespace Seal.Model
         }
 
         bool _processSubReports = false;
+<<<<<<< HEAD
+=======
+        Dictionary<ReportModel, List<string>> _previousPageIds = new Dictionary<ReportModel, List<string>>(); 
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
         private void buildPages(ReportModel model)
         {
             _processSubReports = model.Elements.Exists(i => i.MetaColumn.SubReports.Count > 0);
@@ -898,6 +924,13 @@ namespace Seal.Model
                     //Create Page table
                     currentPage.Pages = pageValues;
                     model.Pages.Add(currentPage);
+<<<<<<< HEAD
+=======
+
+                    //set previous page ids if exists
+                    if (model.PreviousPageIds.Count >= model.Pages.Count) currentPage.PageId = model.PreviousPageIds[model.Pages.Count - 1];
+
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
                     //Set navigation values if any
                     setSubReportNavigation(pageValues, hiddenValues);
                 }

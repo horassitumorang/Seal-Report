@@ -4,6 +4,10 @@
 var _da;
 var _daEditor;
 var hasEditor;
+<<<<<<< HEAD
+=======
+var wnvPdfConverter;
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
 //Muuri layout
 function loadLayout(grid, serializedLayout) {
     var layout = JSON.parse(serializedLayout);
@@ -34,6 +38,10 @@ var SWIDashboard = /** @class */ (function () {
         this._grids = [];
         this._gridsById = [];
         this._refreshTimers = [];
+<<<<<<< HEAD
+=======
+        this._pendingRequest = 0;
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
     }
     SWIDashboard.prototype.reorderItems = function (init) {
         if (!_da || !_da._dashboard)
@@ -133,9 +141,17 @@ var SWIDashboard = /** @class */ (function () {
         initRestrictions("#" + data.itemguid);
     };
     SWIDashboard.prototype.refreshDashboardItem = function (guid, itemguid, force) {
+<<<<<<< HEAD
         clearTimeout(_da._refreshTimers[itemguid]);
         _gateway.GetDashboardResult(guid, itemguid, force, exportFormat, function (data) {
             _da.handleDashboardResult(data);
+=======
+        _da._pendingRequest++;
+        clearTimeout(_da._refreshTimers[itemguid]);
+        _gateway.GetDashboardResult(guid, itemguid, force, exportFormat, function (data) {
+            _da.handleDashboardResult(data);
+            _da._pendingRequest--;
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
         });
     };
     SWIDashboard.prototype.initDashboardItems = function (guid) {
@@ -371,7 +387,12 @@ var SWIDashboard = /** @class */ (function () {
                         select.append(SWIUtil.GetOption(pubDashboard.GUID, pubDashboard.FullName, ""));
                     }
                     select.selectpicker({
+<<<<<<< HEAD
                         "liveSearch": true
+=======
+                        "liveSearch": true,
+                        "actionsBox": true
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
                     });
                     //Add
                     SWIUtil.ShowHideControl($("#dashboard-add").parent(), data.length > 0);
@@ -416,7 +437,12 @@ var SWIDashboard = /** @class */ (function () {
                         select.append(SWIUtil.GetOption(pubDashboard.GUID, pubDashboard.FullName, pubDashboard.GUID));
                     }
                     select.selectpicker({
+<<<<<<< HEAD
                         "liveSearch": true
+=======
+                        "liveSearch": true,
+                        "actionsBox": true
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
                     });
                     select = $("#export-format");
                     select.unbind("change").selectpicker("destroy").empty();
@@ -434,6 +460,7 @@ var SWIDashboard = /** @class */ (function () {
                     $("#export-dialog").modal();
                 });
             });
+<<<<<<< HEAD
             //Export End
             if (_main._exporting) {
                 $(document).ajaxStop(function () {
@@ -450,6 +477,27 @@ var SWIDashboard = /** @class */ (function () {
                     }, 500);
                 });
             }
+=======
+            //Export end
+            $(document).ajaxStop(function () {
+                if (_main._exporting) {
+                    setTimeout(function () {
+                        if (_da._pendingRequest <= 0) {
+                            _da._pendingRequest = 0;
+                            //Redraw all...
+                            $.each(_da._ids, function (index, value) {
+                                _da._dashboard = _da._dashboards[value];
+                                _da.reorderItems(false);
+                            });
+                            //var wnvPdfConverter: any;
+                            if (typeof wnvPdfConverter != "undefined") {
+                                wnvPdfConverter.startConversion();
+                            }
+                        }
+                    }, 1000);
+                }
+            });
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
             if (hasEditor) {
                 _daEditor.initMenu();
             }

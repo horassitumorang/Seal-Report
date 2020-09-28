@@ -192,7 +192,10 @@ namespace Seal.Helpers
         {
             if (model != null && script != null && script.Trim().StartsWith("@"))
             {
+<<<<<<< HEAD
                 string result = "";
+=======
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
                 if (string.IsNullOrEmpty(key))
                 {
                     if (model != null)
@@ -209,7 +212,11 @@ namespace Seal.Helpers
                 {
                     Compile(GetFullScript(script, model), model.GetType(), key);
                 }
+<<<<<<< HEAD
                 result = Engine.Razor.Run(key, model.GetType(), model);
+=======
+                string result = Engine.Razor.Run(key, model.GetType(), model);
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
                 return string.IsNullOrEmpty(result) ? "" : result;
             }
             return script;

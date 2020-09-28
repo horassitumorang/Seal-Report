@@ -39,6 +39,12 @@ namespace SealWebServer.Controllers
                     Authenticate();
 
                     if (!WebUser.IsAuthenticated) throw new LoginException(string.IsNullOrEmpty(WebUser.Error) ? Translate("Invalid user name or password") : WebUser.Error);
+<<<<<<< HEAD
+=======
+                    //Load profile
+                    if (System.IO.File.Exists(WebUser.ProfilePath)) WebUser.Profile = SecurityUserProfile.LoadFromFile(WebUser.ProfilePath);
+                    WebUser.Profile.Path = WebUser.ProfilePath;
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
                 }
 
                 //Audit
@@ -445,7 +451,10 @@ namespace SealWebServer.Controllers
                 if (!System.IO.File.Exists(filePath)) throw new Exception("Error: report or file does not exist");
                 repository = Repository.CreateFast();
                 report = Report.LoadFromFile(filePath, repository);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
                 var execution = initReportExecution(report, viewGUID, outputGUID, false);
                 execution.RenderHTMLDisplayForViewer();
                 return getFileResult(report.HTMLDisplayFilePath, report);
@@ -493,6 +502,17 @@ namespace SealWebServer.Controllers
                 //Audit
                 Audit.LogAudit(AuditType.Logout, WebUser);
                 Audit.LogEventAudit(AuditType.EventLoggedUsers, SealSecurity.LoggedUsers.Count(i => i.IsAuthenticated).ToString());
+<<<<<<< HEAD
+=======
+                //Clear session
+                DashboardExecutions.Clear();
+                NavigationContext.Navigations.Clear();
+                setSessionValue(SessionUser, null);
+                setSessionValue(SessionNavigationContext, null);
+                setSessionValue(SessionDashboardExecutions, null);
+                setSessionValue(SessionUploadedFiles, null);
+
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
                 return Json(new { }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
@@ -948,7 +968,11 @@ namespace SealWebServer.Controllers
                         report.ExecutionView.SetParameter(Parameter.ReportFormatParameter, ReportFormat.html.ToString());
                         execution.Execute();
                     }
+<<<<<<< HEAD
                     while (report.IsExecuting) Thread.Sleep(100);
+=======
+                    while (report.IsExecuting && !report.Cancel) Thread.Sleep(100);
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
                 }
 
                 if (report.HasErrors)
@@ -1091,7 +1115,11 @@ namespace SealWebServer.Controllers
                                     Report report = null;
                                     ReportExecution execution = getWidgetViews(item.Widget, out report, ref view, ref modelView);
                                     if (report.Cancel) break;
+<<<<<<< HEAD
                                     if (modelView != null) 
+=======
+                                    if (modelView != null)
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
                                     {
                                         views.Add(modelView);
                                         modelView.Tag = item;

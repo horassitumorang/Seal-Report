@@ -47,6 +47,7 @@ namespace Seal.Model
                 childView.ParentView = this;
                 childView.Report = Report;
                 childView.InitReferences();
+<<<<<<< HEAD
 
                 //backward compatibility for CSV before 4.0...
                 if (childView.TemplateName == "Model CSV Excel" && TemplateName == ReportViewTemplate.ReportName)
@@ -54,6 +55,8 @@ namespace Seal.Model
                     InitParameters(false);
                     SetParameter(Parameter.ReportFormatParameter, ReportFormat.csv.ToString());
                 }
+=======
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
             }
         }
 
@@ -73,6 +76,7 @@ namespace Seal.Model
                 if (resetValues) parameter.Value = configParameter.Value;
                 parameter.InitFromConfiguration(configParameter);
             }
+<<<<<<< HEAD
 
             if (TemplateName == "Report")
             {
@@ -82,6 +86,8 @@ namespace Seal.Model
                 else if (initialParameters.Exists(i => i.Name == "print_layout" && i.Value == "True")) SetParameter(Parameter.ReportFormatParameter, "print");
                 if (initialParameters.Exists(i => i.Name == "display_messages" && i.Value == "True")) SetParameter("messages_mode", "enabledshown");
             }
+=======
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
         }
 
         //Temporary variables to help for report serialization...
@@ -778,6 +784,7 @@ namespace Seal.Model
         public List<string> PdfConfigurations { get; set; } = new List<string>();
         public bool ShouldSerializePdfConfigurations()
         {
+<<<<<<< HEAD
             bool result = false;
             if (Report.Repository.Configuration.PdfConfigurations.Count == 0)
             {
@@ -796,6 +803,9 @@ namespace Seal.Model
             }
 
             return result;
+=======
+            return PdfConverter.ShouldSerialize();
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
         }
 
         /// <summary>
@@ -833,6 +843,7 @@ namespace Seal.Model
         public List<string> ExcelConfigurations { get; set; } = new List<string>();
         public bool ShouldSerializeExcelConfigurations()
         {
+<<<<<<< HEAD
             bool result = false;
 
             if (Report.Repository.Configuration.ExcelConfigurations.Count == 0)
@@ -851,6 +862,9 @@ namespace Seal.Model
                 }
             }
             return result;
+=======
+            return ExcelConverter.ShouldSerialize();
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
         }
 
         private SealExcelConverter _excelConverter = null;
@@ -865,8 +879,11 @@ namespace Seal.Model
                 if (_excelConverter == null)
                 {
                     _excelConverter = SealExcelConverter.Create();
+<<<<<<< HEAD
                     if (ExcelConfigurations.Count == 0) ExcelConfigurations = Repository.Instance.Configuration.ExcelConfigurations.ToList();
 
+=======
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
                     _excelConverter.SetConfigurations(ExcelConfigurations, this);
                     
                 }

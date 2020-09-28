@@ -697,6 +697,10 @@ namespace Seal.Model
             }
         }
 
+<<<<<<< HEAD
+=======
+        List<ReportModel> _executionModels;
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
         /// <summary>
         /// List of model to process during the report execution. By default, only models involved in displayed views are executed, unless they have the ForceModelsLoad flag set to true.
         /// </summary>
@@ -705,10 +709,26 @@ namespace Seal.Model
         {
             get
             {
+<<<<<<< HEAD
                 List<ReportModel> result = new List<ReportModel>();
                 if (ExecutionView.GetBoolValue(Parameter.ForceModelsLoad)) result = Models.ToList();
                 else GetModelsToExecute(ExecutionView, result);
                 return result;
+=======
+                if (_executionModels == null)
+                {
+                    _executionModels = new List<ReportModel>();
+                    if (ExecutionView.GetBoolValue(Parameter.ForceModelsLoad))
+                    {
+                        _executionModels = Models.ToList();
+                    }
+                    else
+                    {
+                        GetModelsToExecute(ExecutionView, _executionModels);
+                    }
+                }
+                return _executionModels;
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
             }
         }
 
@@ -865,6 +885,15 @@ namespace Seal.Model
         public DateTime ExecutionEndDate;
 
         /// <summary>
+<<<<<<< HEAD
+=======
+        /// Restriction View that has triggered the execution
+        /// </summary>
+        [XmlIgnore]
+        public ReportView ExecutionTriggerView;
+
+        /// <summary>
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
         /// Duration of the model execution
         /// </summary>
         [XmlIgnore]
@@ -1956,9 +1985,22 @@ namespace Seal.Model
                         foreach (ReportRestriction restriction in _executionCommonRestrictions)
                         {
                             ReportRestriction modelRestriction = model.Restrictions.Union(model.AggregateRestrictions).Union(model.CommonRestrictions).FirstOrDefault(i => i != restriction && i.IsIdenticalForPrompt(restriction));
+<<<<<<< HEAD
                             if (modelRestriction != null)
                             {
                                 modelRestriction.HtmlIndex = restriction.HtmlIndex;
+=======
+                            if (modelRestriction != null) modelRestriction.HtmlIndex = restriction.HtmlIndex;
+
+                            if (model.IsLINQ)
+                            {
+                                //Apply also for sub-models
+                                foreach (ReportModel subModel in model.LINQSubModels)
+                                {
+                                    ReportRestriction subModelRestriction = subModel.Restrictions.Union(subModel.AggregateRestrictions).Union(subModel.CommonRestrictions).FirstOrDefault(i => i != restriction && i.IsIdenticalForPrompt(restriction));
+                                    if (subModelRestriction != null) subModelRestriction.HtmlIndex = restriction.HtmlIndex;
+                                }
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
                             }
                         }
                     }
@@ -2004,6 +2046,10 @@ namespace Seal.Model
                             {
                                 //Force prompt if the restriction is involved in a view
                                 if (restriction.Prompt == PromptType.None) restriction.Prompt = PromptType.Prompt;
+<<<<<<< HEAD
+=======
+                                restriction.IsViewRestriction = true;
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
                                 _executionViewRestrictions.Add(restriction);
                             }
                         }
@@ -2016,7 +2062,11 @@ namespace Seal.Model
                         foreach (ReportRestriction restriction in _executionViewRestrictions)
                         {
                             ReportRestriction modelRestriction = model.Restrictions.Union(model.AggregateRestrictions).Union(model.CommonRestrictions).FirstOrDefault(i => i != restriction && i.IsIdenticalForPrompt(restriction));
+<<<<<<< HEAD
                             if (modelRestriction != null)
+=======
+                            if (modelRestriction != null && !modelRestriction.IsForNavigation)
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
                             {
                                 modelRestriction.CopyForPrompt(restriction);
                             }
@@ -2029,7 +2079,11 @@ namespace Seal.Model
                                 foreach (ReportRestriction restriction in _executionViewRestrictions)
                                 {
                                     ReportRestriction modelRestriction = subModel.Restrictions.Union(subModel.AggregateRestrictions).Union(subModel.CommonRestrictions).FirstOrDefault(i => i != restriction && i.IsIdenticalForPrompt(restriction));
+<<<<<<< HEAD
                                     if (modelRestriction != null)
+=======
+                                    if (modelRestriction != null && !modelRestriction.IsForNavigation)
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
                                     {
                                         modelRestriction.CopyForPrompt(restriction);
                                     }
@@ -2096,7 +2150,14 @@ namespace Seal.Model
         /// </summary>
         public void GetModelsToExecute(ReportView view, List<ReportModel> result)
         {
+<<<<<<< HEAD
             if (view.Model != null && view.Model.Elements.Count > 0 && !result.Contains(view.Model)) result.Add(view.Model);
+=======
+            if (view.Model != null && view.Model.Elements.Count > 0 && !result.Contains(view.Model))
+            {
+                result.Add(view.Model);
+            }
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
             foreach (var child in view.Views) GetModelsToExecute(child, result);
         }
 

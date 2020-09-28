@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿<?xml version="1.0" encoding="utf-8"?><SealServerConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><WebProductName>Seal Report</WebProductName><FileReplacePatterns><FileReplacePattern><FileName>datatables.min.css</FileName><OldValue>url(Bootstrap-3.3.7/fonts/glyphicons-halflings-regular</OldValue><NewValue>url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/fonts/glyphicons-halflings-regular</NewValue></FileReplacePattern></FileReplacePatterns><CssFiles>_ed.editor.bootstrap.min.css</CssFiles><ScriptFiles>_ed.dataTables.editor.min.js&#xD;
 _ed.editor.bootstrap.min.js&#xD;
 _ed.common.js</ScriptFiles><UseSealScheduler>true</UseSealScheduler><TaskFolderName>Seal Report</TaskFolderName><AuditEnabled>true</AuditEnabled><AuditScript /><InitScript /><ReportCreationScript /><CommonScripts><CommonScript><Name>SetNegativeValuesInRed</Name><Script>@using System.Text&#xD;
@@ -157,3 +158,6 @@ _ed.common.js</ScriptFiles><UseSealScheduler>true</UseSealScheduler><TaskFolderN
   &lt;ConverterScript /&gt;&#xD;
   &lt;DocumentScript /&gt;&#xD;
 &lt;/SealPdfCfg&gt;</string></PdfConfigurations><DefaultCulture /><CsvSeparator /><WebApplicationName>/seal</WebApplicationName><WebApplicationPoolName>Seal Application Pool</WebApplicationPoolName><WebPublicationDirectory>C:\inetpub\wwwroot\Seal Report</WebPublicationDirectory><InstallationDirectory /></SealServerConfiguration>
+=======
+﻿<?xml version="1.0" encoding="utf-8"?><SealServerConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><WebProductName>Seal Report</WebProductName><UseSealScheduler>true</UseSealScheduler><TaskFolderName>Seal Report</TaskFolderName><PdfServicePassword /><PdfWebServiceURL /><DefaultCulture /><CsvSeparator /><WebApplicationName>/Seal</WebApplicationName><WebApplicationPoolName>Seal Application Pool</WebApplicationPoolName><WebPublicationDirectory /><InstallationDirectory /></SealServerConfiguration>
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d

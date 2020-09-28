@@ -371,6 +371,14 @@ namespace Seal
             if (currentNode == null) return;
 
             var model = currentNode.Tag as ReportModel;
+<<<<<<< HEAD
+=======
+
+            var index = model.IsLINQ ? 17 : (model.IsSQLModel ? 15 : 10);
+            currentNode.ImageIndex = index;
+            currentNode.SelectedImageIndex = index;
+
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
             if (model != null && model.IsLINQ)
             {
                 foreach (var subModel in model.LINQSubModels)
@@ -433,6 +441,13 @@ namespace Seal
 
                 currentNode.Expand();
             }
+<<<<<<< HEAD
+=======
+            else if (model != null && !model.IsLINQ)
+            {
+                currentNode.Nodes.Clear();
+            }
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
         }
 
         #endregion
@@ -708,6 +723,11 @@ namespace Seal
         bool _pdfExpanded = false, _excelExpanded = false, _configurationExpanded = true, _widgetExpanded = false;
         private void mainTreeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
+<<<<<<< HEAD
+=======
+            if (_lastDragOverNode != null) return;
+
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
             modelPanel.Visible = false;
             mainPropertyGrid.Visible = false;
 
@@ -1527,8 +1547,15 @@ namespace Seal
             }
         }
 
+<<<<<<< HEAD
         private void mainTreeView_DragDrop(object sender, DragEventArgs e)
         {
+=======
+        TreeNode _lastDragOverNode = null;
+        private void mainTreeView_DragDrop(object sender, DragEventArgs e)
+        {
+            _lastDragOverNode = null;
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
             if (e.Data.GetDataPresent("System.Windows.Forms.TreeNode", false))
             {
                 TreeNode targetNode = ((TreeView)sender).GetNodeAt(((TreeView)sender).PointToClient(new Point(e.X, e.Y)));
@@ -1546,6 +1573,10 @@ namespace Seal
                         SetModified();
                         init(sourceView);
                         e.Effect = DragDropEffects.Move;
+<<<<<<< HEAD
+=======
+                        mainTreeView.SelectedNode = sourceNode;
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
                     }
                     else if (sourceNode.Parent == targetNode.Parent)
                     {
@@ -1573,6 +1604,10 @@ namespace Seal
                         SetModified();
                         mainTreeView.Sort();
                         e.Effect = DragDropEffects.Move;
+<<<<<<< HEAD
+=======
+                        mainTreeView.SelectedNode = sourceNode;
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
                     }
                 }
                 else if (sourceNode != null && targetNode != null && sourceNode.Tag is ReportTask && targetNode.Tag is ReportTask)
@@ -1602,6 +1637,10 @@ namespace Seal
                     SetModified();
                     mainTreeView.Sort();
                     e.Effect = DragDropEffects.Move;
+<<<<<<< HEAD
+=======
+                    mainTreeView.SelectedNode = sourceNode;
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
                 }
             }
         }
@@ -1636,9 +1675,21 @@ namespace Seal
                         e.Effect = DragDropEffects.Move;
                     }
                 }
+<<<<<<< HEAD
             }
         }
 
+=======
+
+                _lastDragOverNode = null;
+                if (targetNode != null && e.Effect == DragDropEffects.Move)
+                {
+                    _lastDragOverNode = targetNode;
+                    mainTreeView.SelectedNode = targetNode;
+                }
+            }
+        }
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
         private void mainTreeView_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             if (selectedEntity is ReportTask)

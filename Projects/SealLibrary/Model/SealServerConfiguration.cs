@@ -357,7 +357,11 @@ namespace Seal.Model
                 if (_pdfConverter == null)
                 {
                     _pdfConverter = SealPdfConverter.Create();
+<<<<<<< HEAD
                     _pdfConverter.SetConfigurations(PdfConfigurations, null);
+=======
+                    _pdfConverter.SetConfigurations(PdfConfigurations, new ReportView());
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
                     UpdateEditorAttributes();
                 }
                 return _pdfConverter;
@@ -450,6 +454,10 @@ namespace Seal.Model
                 {
                     _dashboardPdfConverter = SealPdfConverter.Create();
                     _dashboardPdfConverter.SetConfigurations(DashboardPdfConfigurations, null);
+<<<<<<< HEAD
+=======
+                    _dashboardPdfConverter.Dashboards = new List<Dashboard>();
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
                     UpdateEditorAttributes();
                 }
                 return _dashboardPdfConverter;

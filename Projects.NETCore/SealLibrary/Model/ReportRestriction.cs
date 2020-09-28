@@ -1293,7 +1293,11 @@ namespace Seal.Model
             else
             {
                 var colName = LINQColumnName;
+<<<<<<< HEAD
                 if (IsText && !CaseSensitive && string.IsNullOrEmpty(SQL)) colName += ".ToLower()"; 
+=======
+                if (IsText && !CaseSensitive && string.IsNullOrEmpty(SQL)) colName += ".ToLower()";
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
                 foreach (var val in GetVals(value))
                 {
                     Helper.AddValue(ref LINQText, separator, string.Format("{0}{1}{2}{3}{4}", prefix, colName, LINQOperator, GetLINQValue(val, finalDate, _operator), LINQSuffix));
@@ -1471,7 +1475,11 @@ namespace Seal.Model
                 //Other cases
                 if (_operator == Operator.Contains)
                 {
+<<<<<<< HEAD
                     LINQOperator =  ".Contains(";
+=======
+                    LINQOperator = ".Contains(";
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
                     LINQSuffix = ")";
                 }
                 else if (_operator == Operator.NotContains)
@@ -1513,13 +1521,21 @@ namespace Seal.Model
                         }
                     }
                     else
+<<<<<<< HEAD
                     {                        
+=======
+                    {
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
                         if (HasValue1) addLINQOperator(ref val, Value1, FinalDate1, LINQOperator, LINQSuffix);
                         if (HasValue2) addLINQOperator(ref val, Value2, FinalDate2, LINQOperator, LINQSuffix);
                         if (HasValue3) addLINQOperator(ref val, Value3, FinalDate3, LINQOperator, LINQSuffix);
                         if (HasValue4) addLINQOperator(ref val, Value4, FinalDate4, LINQOperator, LINQSuffix);
                     }
+<<<<<<< HEAD
                     _LINQText += val+")";
+=======
+                    _LINQText += val + ")";
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
                 }
                 else
                 {
@@ -1556,11 +1572,24 @@ namespace Seal.Model
             }
         }
 
+<<<<<<< HEAD
         [XmlIgnore]
+=======
+        /// <summary>
+        /// True is the restriction is for a restriction view
+        /// </summary>
+        [XmlIgnore]
+        public bool IsViewRestriction = false;
+
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
         string _displayText;
         /// <summary>
         /// Display text of the full restriction (label and value)
         /// </summary>
+<<<<<<< HEAD
+=======
+        [XmlIgnore]
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
         public string DisplayText
         {
             get
@@ -1570,11 +1599,18 @@ namespace Seal.Model
             }
         }
 
+<<<<<<< HEAD
         [XmlIgnore]
+=======
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
         string _SQLText;
         /// <summary>
         /// SQL of the restriction 
         /// </summary>
+<<<<<<< HEAD
+=======
+        [XmlIgnore]
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
         public string SQLText
         {
             get
@@ -1584,11 +1620,18 @@ namespace Seal.Model
             }
         }
 
+<<<<<<< HEAD
         [XmlIgnore]
+=======
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
         string _LINQText;
         /// <summary>
         /// LINQ of the restriction 
         /// </summary>
+<<<<<<< HEAD
+=======
+        [XmlIgnore]
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
         public string LINQText
         {
             get
@@ -1745,6 +1788,7 @@ namespace Seal.Model
             return (IsCommonRestrictionValue && restriction.IsCommonRestrictionValue && Name == restriction.Name) || (!IsCommonRestrictionValue && !restriction.IsCommonRestrictionValue && MetaColumnGUID == restriction.MetaColumnGUID && DisplayNameEl == restriction.DisplayNameEl);
         }
 
+<<<<<<< HEAD
         public void CopyForPrompt(ReportRestriction restriction)
         {
                 HtmlIndex = restriction.HtmlIndex;
@@ -1762,6 +1806,30 @@ namespace Seal.Model
                 Value4 = restriction.Value4;
                 Date4 = restriction.Date4;
                 Date4Keyword = restriction.Date4Keyword;
+=======
+        /// <summary>
+        /// Copy restriction property from another prompted restriction
+        /// </summary>
+        /// <param name="restriction"></param>
+        public void CopyForPrompt(ReportRestriction restriction)
+        {
+            HtmlIndex = restriction.HtmlIndex;
+            Prompt = restriction.Prompt;
+            Operator = restriction.Operator;
+            Value1 = restriction.Value1;
+            Date1 = restriction.Date1;
+            Date1Keyword = restriction.Date1Keyword;
+            Value2 = restriction.Value2;
+            Date2 = restriction.Date2;
+            Date2Keyword = restriction.Date2Keyword;
+            Value3 = restriction.Value3;
+            Date3 = restriction.Date3;
+            Date3Keyword = restriction.Date3Keyword;
+            Value4 = restriction.Value4;
+            Date4 = restriction.Date4;
+            Date4Keyword = restriction.Date4Keyword;
+            EnumValues = restriction.EnumValues.ToList();
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
         }
     }
 }

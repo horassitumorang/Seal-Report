@@ -85,6 +85,17 @@ namespace Seal.Model
             return new List<string>();
         }
 
+<<<<<<< HEAD
+=======
+        /// <summary>
+        /// True if the configuration should be serialized
+        /// </summary>
+        public virtual bool ShouldSerialize()
+        {
+            return false;
+        }
+
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
 
 
         public virtual string GetLicenseText()

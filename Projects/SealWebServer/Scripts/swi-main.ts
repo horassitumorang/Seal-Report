@@ -272,6 +272,10 @@ class SWIMain {
             _gateway.Logout(function (e) {
                 _main._connected = false;
                 $("#main-container").css("display", "none");
+<<<<<<< HEAD
+=======
+                $("#main-dashboard").css("display", "none");
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
                 _main.showLogin();
                 if (SWIUtil.IsMobile()) $('.navbar-toggle').click();
             });
@@ -389,6 +393,10 @@ class SWIMain {
         $(document).ajaxStart(function () {
             $("#refresh-nav-item").addClass("fa-spin");
         });
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
         $(document).ajaxStop(function () {
             $("#refresh-nav-item").removeClass("fa-spin");
         });

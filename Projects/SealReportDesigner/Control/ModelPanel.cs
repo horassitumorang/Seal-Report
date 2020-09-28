@@ -253,7 +253,10 @@ namespace Seal.Controls
             }
         }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
         void btn_MouseDown(object sender, MouseEventArgs e)
         {
             Button button = (Button)sender;
@@ -303,6 +306,7 @@ namespace Seal.Controls
                 });
                 if (!Model.IsSubModel) menu.Items.Add(item);
 
+<<<<<<< HEAD
                 item = new ToolStripMenuItem("Remove all elements");
                 item.Click += new EventHandler(delegate (object sender2, EventArgs e2)
                 {
@@ -310,6 +314,8 @@ namespace Seal.Controls
                 });
                 if (!Model.IsSubModel) menu.Items.Add(item);
 
+=======
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
                 item = new ToolStripMenuItem("Copy");
                 item.Click += new EventHandler(delegate (object sender2, EventArgs e2)
                 {
@@ -324,9 +330,38 @@ namespace Seal.Controls
                     else restrictionsPanel.AddRestriction(element.MetaColumn, true);
                 });
                 menu.Items.Add(item);
+<<<<<<< HEAD
                 if (!Model.IsSubModel)
                 {
                     menu.Items.Add(new ToolStripSeparator());
+=======
+
+                if (!Model.IsSubModel)
+                {
+                    menu.Items.Add(new ToolStripSeparator());
+                    item = new ToolStripMenuItem("Remove all elements");
+                    item.Click += new EventHandler(delegate (object sender2, EventArgs e2)
+                    {
+                        removeElementFromPanel(button, true);
+                    });
+                    menu.Items.Add(item);
+
+                    item = new ToolStripMenuItem("Clear all Sort Orders");
+                    item.Click += new EventHandler(delegate (object sender2, EventArgs e2)
+                    {
+                        ElementPanel panel = (ElementPanel)button.Parent;
+                        foreach (var control in panel.Controls)
+                        {
+                            ReportElement el = ((Button)control).Tag as ReportElement;
+                            if (el != null) el.SortOrder = ReportElement.kNoSortKeyword;
+                        }
+                        btn_MouseDown(button, null);
+                        MainForm.IsModified = true;
+                    });
+                    menu.Items.Add(item);
+
+                    menu.Items.Add(new ToolStripSeparator());
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
                     item = new ToolStripMenuItem("Smart copy...");
                     item.Click += new EventHandler(delegate (object sender2, EventArgs e2)
                     {
@@ -365,7 +400,13 @@ namespace Seal.Controls
                 if (element.MetaColumn == node.Tag)
                 {
                     elementTreeView.SelectedNode = node;
+<<<<<<< HEAD
                     elementTreeView.SelectedNode.EnsureVisible();
+=======
+                    node.EnsureVisible();
+                    node.BackColor = SystemColors.Highlight;
+                    node.ForeColor = Color.White;
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
                     elementTreeView.Focus();
                     return true;
                 }
@@ -374,6 +415,19 @@ namespace Seal.Controls
             return false;
         }
 
+<<<<<<< HEAD
+=======
+        private void ElementTreeView_BeforeSelect(object sender, TreeViewCancelEventArgs e)
+        {
+            if (elementTreeView.SelectedNode != null)
+            {
+                elementTreeView.SelectedNode.ForeColor = Color.Black;
+                elementTreeView.SelectedNode.BackColor = Color.White;
+            }
+        }
+
+
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
         void resizeControls()
         {
             int referenceWidth = elementsContainer.Panel1.Width - 6;
@@ -586,8 +640,18 @@ namespace Seal.Controls
                         Model.Restriction = "";
                         Model.AggregateRestrictions.Clear();
                         Model.AggregateRestriction = "";
+<<<<<<< HEAD
 
                         MainForm.RefreshNode();
+=======
+                        if (Model.IsLINQ)
+                        {
+                            Model.LINQSubModels.Clear();
+                            Model.LINQSubTables.Clear();
+                        }
+
+                        MainForm.UpdateModelNode();
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
                     }
                     else
                     {

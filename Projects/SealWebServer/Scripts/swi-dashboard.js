@@ -140,6 +140,7 @@ var SWIDashboard = /** @class */ (function () {
         _gateway.GetDashboardResult(guid, itemguid, force, exportFormat, function (data) {
             _da.handleDashboardResult(data);
             _da._pendingRequest--;
+<<<<<<< HEAD
             setTimeout(function () {
                 if (_da._pendingRequest <= 0 && typeof wnvPdfConverter != "undefined") {
                     wnvPdfConverter.startConversion();
@@ -161,6 +162,8 @@ var SWIDashboard = /** @class */ (function () {
                     }
                 }, 1000);
             }
+=======
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
         });
     };
     SWIDashboard.prototype.initDashboardItems = function (guid) {
@@ -461,6 +464,28 @@ var SWIDashboard = /** @class */ (function () {
                     $("#export-dialog").modal();
                 });
             });
+<<<<<<< HEAD
+=======
+            //Export end
+            $(document).ajaxStop(function () {
+                if (_main._exporting) {
+                    setTimeout(function () {
+                        if (_da._pendingRequest <= 0) {
+                            _da._pendingRequest = 0;
+                            //Redraw all...
+                            $.each(_da._ids, function (index, value) {
+                                _da._dashboard = _da._dashboards[value];
+                                _da.reorderItems(false);
+                            });
+                            //var wnvPdfConverter: any;
+                            if (typeof wnvPdfConverter != "undefined") {
+                                wnvPdfConverter.startConversion();
+                            }
+                        }
+                    }, 1000);
+                }
+            });
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
             if (hasEditor) {
                 _daEditor.initMenu();
             }

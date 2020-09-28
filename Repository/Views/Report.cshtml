@@ -89,7 +89,11 @@
         var hasRestrictions = @Helper.ToJS(report.HasRestrictions);
         var showRestrictions = @Helper.ToJS(report.HasRestrictions && view.GetBoolValue("restriction_button"));
         var hasNavigation = @Helper.ToJS(report.HasNavigation && (report.IsNavigating || report.GenerateHTMLDisplay));/*SRKW do not modify*/
+<<<<<<< HEAD
         var forceExecution = @Helper.ToJS(view.GetBoolValue("force_execution") || report.HasNavigation);
+=======
+        var forceExecution = @Helper.ToJS(view.GetBoolValue(Parameter.ForceExecutionParameter) || report.HasNavigation);
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
         var isExecuting = @Helper.ToJS(report.IsExecuting);
         var isCancel = @Helper.ToJS(report.Cancel);
         var printLayout = @Helper.ToJS(report.PrintLayout);

@@ -364,7 +364,11 @@ function mainInit() {
     //result links
     $(".sr_result").click(function () {
         var target = $(this).attr("newtarget")
+<<<<<<< HEAD
         $("#header_form").attr("target", urlPrefix != "" && target ? target : "");
+=======
+        $("#header_form").attr("target", urlPrefix != ""  ? "_blank" : "");
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
         $("#header_form").attr("action", urlPrefix + $(this).attr("id"));
         $("#header_form").submit();
         //Collapse navbar

@@ -105,6 +105,7 @@ namespace Seal.Model
         /// </summary>
         public string LoadScript { get; set; }
 
+<<<<<<< HEAD
         private bool _aggregateSubModels = true;
         /// <summary>
         /// If true, aggregates are propagated to sub-models elements, otherwise the sub-models elements have no aggregate. This may impact the final performances and results (especially for Count or Average aggregates). 
@@ -123,6 +124,46 @@ namespace Seal.Model
             }
         }
         public bool ShouldSerializeAggregateSubModels() { return !_aggregateSubModels; }
+=======
+        private bool _subModelsSetRestr = true;
+        /// <summary>
+        /// If true, restrictions and theirs values defined for the LINQ model are automatically copied to the sub-models.
+        /// </summary>
+        public bool SubModelsSetRestr
+        {
+            get
+            {
+                return _subModelsSetRestr;
+            }
+            set
+            {
+                bool updateModels = (Report != null && _subModelsSetRestr != value);
+                _subModelsSetRestr = value;
+                if (updateModels) BuildQuery(false, true);
+            }
+        }
+        public bool ShouldSerializeSubModelsSetRestr() { return !_subModelsSetRestr; }
+
+
+        private bool _subModelsSetAggr = true;
+        /// <summary>
+        /// If true, aggregates are copied to sub-models elements, otherwise the sub-models elements have no aggregate. This may impact the final performances and results (especially for Count or Average aggregates). 
+        /// </summary>
+        public bool SubModelsSetAggr
+        {
+            get
+            {
+                return _subModelsSetAggr;
+            }
+            set
+            {
+                bool updateModels = (Report != null &&  _subModelsSetAggr != value);
+                _subModelsSetAggr = value;
+                if (updateModels) BuildQuery(false, true);
+            }
+        }
+        public bool ShouldSerializeSubModelsSetAggr() { return !_subModelsSetAggr; }
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
 
         /// <summary>
         /// Optional Razor Script to modify the model after its generation
@@ -733,6 +774,15 @@ model.ResultTable = query2.CopyToDataTable2();
         public bool ExecResultPagesBuilt = false;
 
         /// <summary>
+<<<<<<< HEAD
+=======
+        /// Page Ids got from previous execution
+        /// </summary>
+        [XmlIgnore]
+        public List<string> PreviousPageIds = new List<string>();
+
+        /// <summary>
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
         /// Check NVD3 Chart and set the ExecNVD3ChartType property
         /// </summary>
         public void CheckNVD3ChartIntegrity()
@@ -1307,7 +1357,11 @@ model.ResultTable = query2.CopyToDataTable2();
                 foreach (var table in FromTables.Where(i => i.IsSQL && !Source.MetaData.Joins.Exists(j => j.LeftTableGUID == i.GUID || j.RightTableGUID == i.GUID)).ToList())
                 {
                     //but we need at least one table per source
+<<<<<<< HEAD
                     if (FromTables.Exists(i => i != table && i.Source == table.Source)) FromTables.Remove(table);
+=======
+                    if (FromTables.Exists(i => i != table && i.Source.GUID == table.Source.GUID)) FromTables.Remove(table);
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
                 }
             }
         }
@@ -2180,8 +2234,14 @@ model.ResultTable = query2.CopyToDataTable2();
                 var subModel = currentSubModels.FirstOrDefault(i => i.SourceGUID == table.LINQSourceGUID);
                 if (subModel == null)
                 {
+<<<<<<< HEAD
                     subModel = new ReportModel() { SourceGUID = table.LINQSourceGUID, Name = Source.Name };
                 }
+=======
+                    subModel = new ReportModel() { SourceGUID = table.LINQSourceGUID };
+                }
+                subModel.Name = table.Source.Name;
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
                 subModel.MasterModel = this;
                 subModel.Report = Report;
                 subModel.InitReferences();
@@ -2208,7 +2268,11 @@ model.ResultTable = query2.CopyToDataTable2();
                     }
                     subModel.Elements.Add(element2);
                     element2.Name = element.Name;
+<<<<<<< HEAD
                     element2.PivotPosition = AggregateSubModels ? element.PivotPosition : PivotPosition.Row;
+=======
+                    element2.PivotPosition = SubModelsSetAggr ? element.PivotPosition : PivotPosition.Row;
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
                     element2.AggregateFunction = element.AggregateFunction;
                 }
 
@@ -2228,8 +2292,47 @@ model.ResultTable = query2.CopyToDataTable2();
                 foreach (var restr in Restrictions.Union(AggregateRestrictions).Where(i => i.MetaColumn != null && i.MetaColumn.MetaTable != null && i.MetaColumn.MetaTable.LINQSourceGUID == subModel.SourceGUID))
                 {
                     subModel.addHiddenElement(restr.MetaColumnGUID);
+<<<<<<< HEAD
                 }
 
+=======
+
+                    if (SubModelsSetRestr)
+                    {
+                        //propagate restrictions
+                        var restriction = subModel.Restrictions.FirstOrDefault(i => i.MetaColumnGUID == restr.MetaColumnGUID);
+                        if (restriction == null)
+                        {
+                            restriction = ReportRestriction.CreateReportRestriction();
+                            restriction.PivotPosition = PivotPosition.Row;
+                            restriction.MetaColumnGUID = restr.MetaColumnGUID;
+                            subModel.Restrictions.Add(restriction);
+                            if (!string.IsNullOrEmpty(subModel.Restriction)) subModel.Restriction += "\r\nAND ";
+                            subModel.Restriction += ReportRestriction.kStartRestrictionChar + restriction.GUID + ReportRestriction.kStopRestrictionChar;
+                        }
+                        restriction.DisplayNameEl = restr.DisplayNameEl;
+                        restriction.Prompt = restr.Prompt;
+                        restriction.Operator = restr.Operator;
+                        restriction.Value1 = restr.Value1;
+                        restriction.Value2 = restr.Value2;
+                        restriction.Value3 = restr.Value3;
+                        restriction.Value4 = restr.Value4;
+                        restriction.Date1 = restr.Date1;
+                        restriction.Date2 = restr.Date2;
+                        restriction.Date3 = restr.Date3;
+                        restriction.Date4 = restr.Date4;
+                        restriction.Date1Keyword = restr.Date1Keyword;
+                        restriction.Date2Keyword = restr.Date2Keyword;
+                        restriction.Date3Keyword = restr.Date3Keyword;
+                        restriction.Date4Keyword = restr.Date4Keyword;
+                        restriction.EnumValues = restr.EnumValues.ToList();
+                    }
+                }
+
+                //clear sort
+                foreach (var el in subModel.Elements) el.SortOrder = "";
+
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
                 subModel.InitReferences();
             }
 

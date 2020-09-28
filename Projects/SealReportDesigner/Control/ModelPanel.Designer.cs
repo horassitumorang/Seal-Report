@@ -117,6 +117,10 @@
             this.elementTreeView.DragEnter += new System.Windows.Forms.DragEventHandler(this.elementTreeView_DragEnter);
             this.elementTreeView.DragOver += new System.Windows.Forms.DragEventHandler(this.elementTreeView_DragOver);
             this.elementTreeView.DoubleClick += new System.EventHandler(this.elementTreeView_DoubleClick);
+<<<<<<< HEAD
+=======
+            this.elementTreeView.BeforeSelect += ElementTreeView_BeforeSelect;
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
             // 
             // elementsSplitContainer
             // 

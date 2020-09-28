@@ -15,6 +15,11 @@ declare function getTopLeft(item: any);
 declare function initNavCells(executionGUID: string, parentSelector: string);
 declare function initRestrictions(parent: any);
 
+<<<<<<< HEAD
+=======
+var wnvPdfConverter: any;
+
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
 //Muuri layout
 function loadLayout(grid, serializedLayout) {
     var layout = JSON.parse(serializedLayout);
@@ -50,6 +55,10 @@ class SWIDashboard {
     public _lastGUID;
     public _dragType;
     public _dragData;
+<<<<<<< HEAD
+=======
+    public _pendingRequest = 0;
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
 
     public reorderItems(init: boolean) {
         if (!_da || !_da._dashboard) return;
@@ -89,7 +98,11 @@ class SWIDashboard {
         });
     }
 
+<<<<<<< HEAD
     private enableControls() {
+=======
+    public enableControls() {
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
         var addWidget = $("#dashboard-add-widget");
         var spinnerHidden = !$(".spinner-menu").is(":visible");
         SWIUtil.ShowHideControl(addWidget, hasEditor && _da._dashboard && _da._dashboard.Editable);
@@ -159,9 +172,17 @@ class SWIDashboard {
     }
 
     private refreshDashboardItem(guid: string, itemguid: string, force: boolean) {
+<<<<<<< HEAD
         clearTimeout(_da._refreshTimers[itemguid]);
         _gateway.GetDashboardResult(guid, itemguid, force, exportFormat, function (data) {
             _da.handleDashboardResult(data);
+=======
+        _da._pendingRequest++;
+        clearTimeout(_da._refreshTimers[itemguid]);
+        _gateway.GetDashboardResult(guid, itemguid, force, exportFormat, function (data) {
+            _da.handleDashboardResult(data);
+            _da._pendingRequest--;
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
         });
     }
 
@@ -424,7 +445,12 @@ class SWIDashboard {
                         select.append(SWIUtil.GetOption(pubDashboard.GUID, pubDashboard.FullName, ""));
                     }
                     select.selectpicker({
+<<<<<<< HEAD
                         "liveSearch": true
+=======
+                        "liveSearch": true,
+                        "actionsBox" : true
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
                     });
 
                     //Add
@@ -472,7 +498,12 @@ class SWIDashboard {
                         select.append(SWIUtil.GetOption(pubDashboard.GUID, pubDashboard.FullName, pubDashboard.GUID));
                     }
                     select.selectpicker({
+<<<<<<< HEAD
                         "liveSearch": true
+=======
+                        "liveSearch": true,
+                        "actionsBox": true
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
                     });
 
                     select = $("#export-format");
@@ -493,6 +524,7 @@ class SWIDashboard {
                 });
             });
 
+<<<<<<< HEAD
             //Export End
             if (_main._exporting) {
                 $(document).ajaxStop(function () {
@@ -509,6 +541,27 @@ class SWIDashboard {
                     }, 500);
                 });
             }
+=======
+            //Export end
+            $(document).ajaxStop(function () {
+                if (_main._exporting) {
+                    setTimeout(function () {
+                        if (_da._pendingRequest <= 0) {
+                            _da._pendingRequest = 0;
+                            //Redraw all...
+                            $.each(_da._ids, function (index, value) {
+                                _da._dashboard = _da._dashboards[value];
+                                _da.reorderItems(false);
+                            });
+                            //var wnvPdfConverter: any;
+                            if (typeof wnvPdfConverter != "undefined") {
+                                wnvPdfConverter.startConversion();
+                            }
+                        }
+                    }, 1000);
+                }
+            });
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
 
             if (hasEditor) {
                 _daEditor.initMenu();

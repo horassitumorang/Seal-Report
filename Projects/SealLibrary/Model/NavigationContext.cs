@@ -209,6 +209,10 @@ namespace Seal.Model
                     restriction.MetaColumnGUID = src;
                     restriction.Operator = Operator.Equal;
                     restriction.SetDefaults();
+<<<<<<< HEAD
+=======
+                    restriction.IsForNavigation = true;
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
                     if (val == "") restriction.Operator = Operator.IsEmpty;
                     restriction.SetNavigationValue(val);
                     if (!string.IsNullOrEmpty(model.Restriction)) model.Restriction = string.Format("({0}) {1} ", model.Restriction, model.IsLINQ ? "&&" : "AND");

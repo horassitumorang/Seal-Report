@@ -377,11 +377,16 @@ class SWIGateway {
     }
 
     public ExportDashboards(dashboards: string, format: string) {
+<<<<<<< HEAD
         var f = this.getExecForm("SWExportDashboards", format == "htmlprint" ? "_blank" : "");
+=======
+        var f = this.getExecForm("SWExportDashboards", "_blank");
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
         f.append($('<input />').attr('name', 'dashboards').attr('value', dashboards));
         f.append($('<input />').attr('name', 'format').attr('value', format));
         f.children('input').attr('type', 'hidden');
         f.submit();
+<<<<<<< HEAD
     }
 /*
         $.post(_server + "DashboardsExport", {
@@ -391,4 +396,7 @@ class SWIGateway {
             .done(function (data) { callbackHandler(data, callback, errorcb); })
             .fail(function (xhr, status, error) { failure(xhr, status, error); });*/
   
+=======
+    }  
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
 }

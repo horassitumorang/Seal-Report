@@ -493,6 +493,21 @@ namespace Seal.Helpers
 
         string _mssqlError = "";
         int _mssqlErrorClassLevel = 11;
+<<<<<<< HEAD
+=======
+
+        /// <summary>
+        /// Execute a .sql file
+        /// </summary>
+        public void ExecuteMSSQLFile(string filePath, bool useAllConnections = false, bool stopOnError = true, int errorClassLevel = 11)
+        {
+            ExecuteMSSQLScripts(Path.GetDirectoryName(filePath), useAllConnections, stopOnError, errorClassLevel, Path.GetFileName(filePath));
+        }
+
+        /// <summary>
+        /// Execute .sql files located in a directory
+        /// </summary>
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
         public void ExecuteMSSQLScripts(string scriptsDirectory, bool useAllConnections = false, bool stopOnError = true, int errorClassLevel = 11, string fileNameFilter = "")
         {
             _mssqlError = "";

@@ -219,12 +219,20 @@ namespace Seal.Forms
                 {
                     case ReportExecution.ActionExecuteReport:
                         setCurrentExecution();
+<<<<<<< HEAD
                         cancelNavigation = true;
+=======
+                       cancelNavigation = true;
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
                         _reportDone = false;
                         if (webBrowser.Document != null)
                         {
                             initFromForm(HeaderForm);
                         }
+<<<<<<< HEAD
+=======
+                        _report.ExecutionTriggerView = null;
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
                         _report.IsNavigating = false;
                         Execute();
                         break;
@@ -388,9 +396,16 @@ namespace Seal.Forms
                                 var form = webBrowser.Document.Forms[formId];
                                 initFromForm(form);
 
+<<<<<<< HEAD
                                 _report.IsNavigating = false;
                                 _execution.Execute();
                                 while (_report.IsExecuting) Thread.Sleep(100);
+=======
+                                _report.ExecutionTriggerView = _report.AllViews.FirstOrDefault(i => formId.EndsWith(i.IdSuffix));
+                                _report.IsNavigating = false;
+                                _execution.Execute();
+                                while (_report.IsExecuting && !_report.Cancel) Thread.Sleep(100);
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
 
                                 _url = "file:///" + _report.HTMLDisplayFilePath;
                                 _navigation.SetNavigation(_execution);

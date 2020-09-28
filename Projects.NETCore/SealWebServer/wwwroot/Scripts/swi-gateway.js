@@ -22,6 +22,7 @@ function failure(xhr, status, error) {
 var SWIGateway = /** @class */ (function () {
     function SWIGateway() {
         this._execForm = null;
+<<<<<<< HEAD
         /*
                 $.post(_server + "DashboardsExport", {
                     dashboards: dashboards,
@@ -29,6 +30,8 @@ var SWIGateway = /** @class */ (function () {
                 })
                     .done(function (data) { callbackHandler(data, callback, errorcb); })
                     .fail(function (xhr, status, error) { failure(xhr, status, error); });*/
+=======
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
     }
     SWIGateway.prototype.getExecForm = function (action, target) {
         if (this._execForm == null)
@@ -342,7 +345,11 @@ var SWIGateway = /** @class */ (function () {
             .fail(function (xhr, status, error) { failure(xhr, status, error); });
     };
     SWIGateway.prototype.ExportDashboards = function (dashboards, format) {
+<<<<<<< HEAD
         var f = this.getExecForm("SWExportDashboards", format == "htmlprint" ? "_blank" : "");
+=======
+        var f = this.getExecForm("SWExportDashboards", "_blank");
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
         f.append($('<input />').attr('name', 'dashboards').attr('value', dashboards));
         f.append($('<input />').attr('name', 'format').attr('value', format));
         f.children('input').attr('type', 'hidden');

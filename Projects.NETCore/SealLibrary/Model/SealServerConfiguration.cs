@@ -116,7 +116,11 @@ namespace Seal.Model
         /// </summary>
         public string TaskFolderName { get; set; } = Repository.SealRootProductName + " Report";
 
+<<<<<<< HEAD
        bool _auditEnabled = false;
+=======
+        bool _auditEnabled = false;
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
         /// <summary>
         /// If true, the Audit script is executed for the follwing events: login, logout, report execution and management, folder management, file management, dashboard management.
         /// </summary>
@@ -242,7 +246,11 @@ namespace Seal.Model
                 if (_pdfConverter == null)
                 {
                     _pdfConverter = SealPdfConverter.Create();
+<<<<<<< HEAD
                     _pdfConverter.SetConfigurations(PdfConfigurations, null);
+=======
+                    _pdfConverter.SetConfigurations(PdfConfigurations, new ReportView());
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
                     
                 }
                 return _pdfConverter;
@@ -327,6 +335,10 @@ namespace Seal.Model
                 {
                     _dashboardPdfConverter = SealPdfConverter.Create();
                     _dashboardPdfConverter.SetConfigurations(DashboardPdfConfigurations, null);
+<<<<<<< HEAD
+=======
+                    _dashboardPdfConverter.Dashboards = new List<Dashboard>();
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
                     
                 }
                 return _dashboardPdfConverter;
@@ -334,6 +346,16 @@ namespace Seal.Model
             set { _dashboardPdfConverter = value; }
         }
 
+<<<<<<< HEAD
+=======
+        public SealPdfConverter GetDashboardPdfConverter()
+        {
+            var dashboardPdfConverter = SealPdfConverter.Create();
+            dashboardPdfConverter.SetConfigurations(DashboardPdfConfigurations, null);
+            return dashboardPdfConverter;
+        }
+
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
         /// <summary>
         /// True if the Pdf configurations were edited
         /// </summary>

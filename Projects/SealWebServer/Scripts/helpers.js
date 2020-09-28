@@ -70,6 +70,7 @@ function executeFromTrigger(source) {
         container.addClass("disabled");
         container.children(".glyphicon").css("display", "inline");
         if (urlPrefix !== "") {
+<<<<<<< HEAD
             $.post(urlPrefix + action, form.serialize() + "&execution_guid=" + form.attr("execguid"))
                 .done(function (data) {
                     //Update each view involved
@@ -84,6 +85,33 @@ function executeFromTrigger(source) {
                     container.children(".glyphicon").css("display", "none");
                     inExecution = false;
                 });
+=======
+            //trigger in a new report
+            if (form.attr("target")) {
+                form.attr("action", urlPrefix + "ActionExecuteFromTrigger");
+                form.submit();
+                container.removeClass("disabled");
+                container.children(".glyphicon").css("display", "none");
+                inExecution = false;
+                return;
+            }
+            else {
+                $.post(urlPrefix + action, form.serialize() + "&execution_guid=" + form.attr("execguid") + "&form_id=" + form.attr("id"))
+                    .done(function (data) {
+                        //Update each view involved
+                        data.forEach(function (value) {
+                            if (form.attr("id") != $(value).attr("id")) {
+                                var viewId = "#" + $(value).attr("id");
+                                $(viewId).html($(value).html());
+                                initRestrictions(viewId);
+                            }
+                        });
+                        container.removeClass("disabled");
+                        container.children(".glyphicon").css("display", "none");
+                        inExecution = false;
+                    });
+            }
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
         }
         else {
             $("#id_load").val(form.attr("id"));
@@ -235,6 +263,7 @@ function initRestrictions(parent) {
         form.addClass("disabled");
         button.removeClass("btn-success").addClass("btn-warning");
         if (urlPrefix !== "") {
+<<<<<<< HEAD
             $.post(urlPrefix + action, form.serialize() + "&execution_guid=" + form.attr("execguid"))
                 .done(function (data) {
                     //Update each view involved
@@ -249,6 +278,34 @@ function initRestrictions(parent) {
                     button.removeClass("btn-warning").addClass("btn-success");
                     inExecution = false;
                 });
+=======
+            //trigger in a new report
+            if (form.attr("target")) {
+                form.attr("action", urlPrefix + "ActionExecuteFromTrigger");
+                form.submit();
+                form.removeClass("disabled");
+                button.removeClass("btn-warning").addClass("btn-success");
+                inExecution = false;
+                return;
+            }
+            else {
+                //trigger to update current views
+                $.post(urlPrefix + action, form.serialize() + "&execution_guid=" + form.attr("execguid") + "&form_id=" + formId)
+                    .done(function (data) {
+                        //Update each view involved
+                        data.forEach(function (value) {
+                            if (form.attr("id") != $(value).attr("id")) {
+                                var viewId = "#" + $(value).attr("id");
+                                $(viewId).html($(value).html());
+                                initRestrictions(viewId);
+                            }
+                        });
+                        form.removeClass("disabled");
+                        button.removeClass("btn-warning").addClass("btn-success");
+                        inExecution = false;
+                    });
+            }
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
         }
         else {
             setTimeout(function () {
@@ -323,7 +380,15 @@ function showPopupNavMenu(source, content, forChart, executionguid) {
         }
         if (!inReport) {
             //Navigation from dashboard
+<<<<<<< HEAD
             var f = $('<form method="post" target="' + executionguid + '"/>').appendTo('body');
+=======
+            target = executionguid;
+            //Force new window for report execution or hyperlink
+            if (nav && (nav.startsWith("HL:") || nav.startsWith("RE:"))) target = "_blank";
+
+            var f = $('<form method="post" target="' + target + '"/>').appendTo('body');
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
             f.attr('action', _server + "ActionNavigate");
             f.append($('<input />').attr('name', 'execution_guid').attr('value', executionguid));
             f.append($('<input />').attr('name', 'navigation_id').attr('value', nav));

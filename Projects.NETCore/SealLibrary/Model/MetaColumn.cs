@@ -87,7 +87,11 @@ namespace Seal.Model
         /// <summary>
         /// The order number used to sort the column in the tree view (by table and by category)
         /// </summary>
+<<<<<<< HEAD
         public int DisplayOrder { get; set; } = 0;
+=======
+        public int DisplayOrder { get; set; } = 1;
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
         public bool ShouldSerializeDisplayOrder() { return DisplayOrder != 0; }
 
         /// <summary>
@@ -332,7 +336,15 @@ namespace Seal.Model
         [XmlIgnore]
         public string ColumnName
         {
+<<<<<<< HEAD
             get { return Name.Split('.').Last(); }
+=======
+            get
+            {
+                if (_name == null) return "";
+                return _name.Split('.').Last();
+            }
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
         }
 
         /// <summary>

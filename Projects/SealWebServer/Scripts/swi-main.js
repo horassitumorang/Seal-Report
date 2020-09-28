@@ -226,6 +226,10 @@ var SWIMain = /** @class */ (function () {
             _gateway.Logout(function (e) {
                 _main._connected = false;
                 $("#main-container").css("display", "none");
+<<<<<<< HEAD
+=======
+                $("#main-dashboard").css("display", "none");
+>>>>>>> 4f2e2f000bbbf4881f8e96ff171c906de4ed0b5d
                 _main.showLogin();
                 if (SWIUtil.IsMobile())
                     $('.navbar-toggle').click();
